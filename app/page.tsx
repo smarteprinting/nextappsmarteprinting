@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import Component from '@/components/ui/home/HomeMain';
 
 export const metadata: Metadata = {
@@ -11,5 +12,13 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <Component />;
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-50/50 flex flex-col items-center justify-center p-8">
+        <div className="w-16 h-16 border-4 border-slate-100 border-t-slate-900 rounded-full animate-spin"></div>
+      </div>
+    }>
+      <Component />
+    </Suspense>
+  );
 }

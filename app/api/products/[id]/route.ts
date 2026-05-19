@@ -6,16 +6,14 @@ import Category from '@/lib/models/Category';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
     
     // Resolve dynamic params correctly. Next.js 15 requires awaiting params in dynamic routes,
-    // but in route handlers it is passed as a promise, or directly in some versions.
-    // Let's resolve it safely.
-    const resolvedParams = await params;
-    const idOrSlug = resolvedParams.id;
+    // which are passed as a Promise in the context argument.
+    const { id: idOrSlug } = await context.params;
 
     let product;
 
