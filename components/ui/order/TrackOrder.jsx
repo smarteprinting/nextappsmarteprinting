@@ -22,7 +22,7 @@ const TrackOrder = () => {
             setError(null);
             // We'll try to fetch without token first if they are on a public page
             // If it fails with 401, we know it's protected
-            const { data } = await axios.get(`https://printersbackend.onrender.com/api/orders/${cleanId}`);
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || '/api'}/orders/${cleanId}`);
             
             // Format order data for tracking display
             const formattedOrder = {

@@ -82,7 +82,7 @@ const Header = () => {
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         if (searchQuery.trim()) {
-            navigate(`/?search=${encodeURIComponent(searchQuery)}`);
+            navigate.push(`/?search=${encodeURIComponent(searchQuery)}`);
             setIsSearchOpen(false);
             setShowSuggestions(false);
         }
@@ -93,9 +93,9 @@ const Header = () => {
         setShowSuggestions(false);
 
         if (suggestion.slug) {
-            navigate(`/product/${suggestion.slug}`);
+            navigate.push(`/product/${suggestion.slug}`);
         } else {
-            navigate(`/?search=${encodeURIComponent(suggestion.title)}`);
+            navigate.push(`/?search=${encodeURIComponent(suggestion.title)}`);
         }
     };
 

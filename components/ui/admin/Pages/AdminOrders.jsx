@@ -122,7 +122,7 @@ const AdminOrders = () => {
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`https://printersbackend.onrender.com/api/orders/${selectedOrder._id}/status`, updateForm, {
+            await axios.put(`${process.env.NEXT_PUBLIC_API_URL || '/api'}/orders/${selectedOrder._id}/status`, updateForm, {
                 headers: { Authorization: `Bearer ${userInfo.token}` }
             });
             fetchOrders();
