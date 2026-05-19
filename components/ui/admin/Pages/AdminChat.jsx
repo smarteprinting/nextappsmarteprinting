@@ -2,13 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAllChats, fetchChatById, sendChatMessage, markChatAsRead } from '@/store/actions/chatActions';
-import { Search, Send, User, MoreVertical, Phone, Video, ChevronLeft, MessageCircle } from 'lucide-react';
-import io from 'socket.io-client';
+import { Search, Send, User, MoreVertical, Phone, Video, ChevronLeft, MessageCircle, RefreshCw } from 'lucide-react';
 
 const AdminChat = () => {
     const dispatch = useDispatch();
     const messagesEndRef = useRef(null);
-    const [socket, setSocket] = useState(null);
     const [showMobileList, setShowMobileList] = useState(true);
     const [activeChat, setActiveChat] = useState(null);
     const [newMessage, setNewMessage] = useState('');
@@ -23,32 +21,28 @@ const AdminChat = () => {
     const chatDetails = useSelector((state) => state.chatDetails);
     const { chat: currentChat } = chatDetails;
 
+    // Initial fetch when admin loads chats
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
             dispatch(fetchAllChats());
-
-            // Initialize Socket.io
-            const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || (typeof window !== 'undefined' ? window.location.origin : '');
-            const newSocket = io(socketUrl, {
-                auth: { token: userInfo.token }
-            });
-
-            newSocket.on('connect', () => {
-            });
-
-            newSocket.on('new-message', (data) => {
-                // Refresh chat list and current chat if it's the active one
-                dispatch(fetchAllChats());
-                if (activeChat && data.chatId === activeChat._id) {
-                    dispatch(fetchChatById(data.chatId));
-                }
-            });
-
-            setSocket(newSocket);
-
-            return () => newSocket.close();
         }
     }, [dispatch, userInfo]);
+
+    // Poll for new messages and list updates every 4 seconds when active
+    useEffect(() => {
+        let interval;
+        if (userInfo && userInfo.isAdmin) {
+            interval = setInterval(() => {
+                dispatch(fetchAllChats());
+                if (activeChat) {
+                    dispatch(fetchChatById(activeChat._id));
+                }
+            }, 4000);
+        }
+        return () => {
+            if (interval) clearInterval(interval);
+        };
+    }, [dispatch, userInfo, activeChat]);
 
     useEffect(() => {
         scrollToBottom();
@@ -67,11 +61,6 @@ const AdminChat = () => {
         if (chat.unreadCount > 0) {
             dispatch(markChatAsRead(chat._id));
         }
-
-        // Join chat room
-        if (socket) {
-            socket.emit('join-chat', chat._id);
-        }
     };
 
     const handleSend = (e) => {
@@ -79,20 +68,6 @@ const AdminChat = () => {
         if (!newMessage.trim() || !activeChat) return;
 
         dispatch(sendChatMessage(activeChat._id, newMessage));
-
-        // Emit socket event for real-time update
-        if (socket) {
-            socket.emit('send-message', {
-                chatId: activeChat._id,
-                message: newMessage,
-                sender: {
-                    _id: userInfo._id,
-                    name: userInfo.name,
-                    isAdmin: true
-                }
-            });
-        }
-
         setNewMessage('');
     };
 
@@ -100,6 +75,13 @@ const AdminChat = () => {
         chat.user?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         chat.user?.email.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
+
+    const handleRefreshAll = () => {
+        dispatch(fetchAllChats());
+        if (activeChat) {
+            dispatch(fetchChatById(activeChat._id));
+        }
+    };
 
     return (
         <div className="flex h-[calc(100vh-120px)] bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden relative">
@@ -109,10 +91,20 @@ const AdminChat = () => {
                 ${showMobileList ? 'flex' : 'hidden lg:flex'}
             `}>
                 <div className="p-4 border-b border-slate-200">
-                    <h2 className="font-bold text-lg text-slate-900 mb-3 flex items-center gap-2">
-                        <MessageCircle size={20} className="text-blue-600" />
-                        Customer Chats
-                    </h2>
+                    <div className="flex items-center justify-between mb-3">
+                        <h2 className="font-bold text-lg text-slate-900 flex items-center gap-2">
+                            <MessageCircle size={20} className="text-blue-600" />
+                            Customer Chats
+                        </h2>
+                        <button
+                            onClick={handleRefreshAll}
+                            className="p-1.5 hover:bg-slate-100 rounded-lg text-slate-500 hover:text-slate-700 transition-colors"
+                            title="Refresh chat list"
+                            type="button"
+                        >
+                            <RefreshCw size={16} />
+                        </button>
+                    </div>
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                         <input
@@ -194,6 +186,14 @@ const AdminChat = () => {
                                     <p className="text-xs text-slate-500">{activeChat.user?.email || ''}</p>
                                 </div>
                             </div>
+                            <button
+                                onClick={handleRefreshAll}
+                                className="p-2 hover:bg-slate-100 rounded-full text-slate-500 hover:text-slate-700 transition-colors"
+                                title="Refresh active chat"
+                                type="button"
+                            >
+                                <RefreshCw size={18} />
+                            </button>
                         </div>
 
                         {/* Messages */}

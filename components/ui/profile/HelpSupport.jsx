@@ -2,13 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserChat, sendChatMessage } from '@/store/actions/chatActions';
-import { MessageCircle, Send, X, Minimize2, HelpCircle, Mail, Phone, Clock } from 'lucide-react';
-import io from 'socket.io-client';
+import { MessageCircle, Send, X, Minimize2, HelpCircle, Mail, Phone, Clock, RefreshCw } from 'lucide-react';
 
 const HelpSupport = () => {
     const dispatch = useDispatch();
     const messagesEndRef = useRef(null);
-    const [socket, setSocket] = useState(null);
     const [chatOpen, setChatOpen] = useState(false);
     const [newMessage, setNewMessage] = useState('');
 
@@ -18,39 +16,30 @@ const HelpSupport = () => {
     const chatDetails = useSelector((state) => state.chatDetails);
     const { loading, chat, error } = chatDetails;
 
+    // Initial fetch when user opens support
     useEffect(() => {
         if (userInfo && !userInfo.isAdmin) {
             dispatch(fetchUserChat());
-
-            // Initialize Socket.io
-            const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || (typeof window !== 'undefined' ? window.location.origin : '');
-            const newSocket = io(socketUrl, {
-                auth: { token: userInfo.token }
-            });
-
-            newSocket.on('connect', () => {
-            });
-
-            newSocket.on('new-message', (data) => {
-                // Refresh chat when new message arrives
-                dispatch(fetchUserChat());
-            });
-
-            setSocket(newSocket);
-
-            return () => newSocket.close();
         }
     }, [dispatch, userInfo]);
+
+    // Poll for new messages when chat is open
+    useEffect(() => {
+        let interval;
+        if (chatOpen && userInfo && !userInfo.isAdmin) {
+            dispatch(fetchUserChat());
+            interval = setInterval(() => {
+                dispatch(fetchUserChat());
+            }, 4000); // Poll every 4 seconds for immediate responses
+        }
+        return () => {
+            if (interval) clearInterval(interval);
+        };
+    }, [dispatch, userInfo, chatOpen]);
 
     useEffect(() => {
         scrollToBottom();
     }, [chat]);
-
-    useEffect(() => {
-        if (chat && socket) {
-            socket.emit('join-chat', chat._id);
-        }
-    }, [chat, socket]);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -61,20 +50,6 @@ const HelpSupport = () => {
         if (!newMessage.trim() || !chat) return;
 
         dispatch(sendChatMessage(chat._id, newMessage));
-
-        // Emit socket event for real-time update
-        if (socket) {
-            socket.emit('send-message', {
-                chatId: chat._id,
-                message: newMessage,
-                sender: {
-                    _id: userInfo._id,
-                    name: userInfo.name,
-                    isAdmin: false
-                }
-            });
-        }
-
         setNewMessage('');
     };
 
@@ -188,13 +163,24 @@ const HelpSupport = () => {
                                 <p className="text-xs text-white/80">We're here to help!</p>
                             </div>
                         </div>
-                        <button
-                            onClick={() => setChatOpen(false)}
-                            className="p-2.5 hover:bg-white/20 rounded-lg transition-colors"
-                            aria-label="Close chat"
-                        >
-                            <X size={20} />
-                        </button>
+                        <div className="flex items-center gap-1">
+                            <button
+                                onClick={() => dispatch(fetchUserChat())}
+                                className="p-2.5 hover:bg-white/20 rounded-lg transition-colors"
+                                aria-label="Refresh chat"
+                                type="button"
+                            >
+                                <RefreshCw size={18} />
+                            </button>
+                            <button
+                                onClick={() => setChatOpen(false)}
+                                className="p-2.5 hover:bg-white/20 rounded-lg transition-colors"
+                                aria-label="Close chat"
+                                type="button"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
                     </div>
 
                     {/* Messages */}
