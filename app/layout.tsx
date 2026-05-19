@@ -68,6 +68,11 @@ export const metadata: Metadata = {
     description: "Shop affordable, high-quality printers and printing supplies online. Inkjet, laser, all-in-one printers with free shipping across North America.",
     images: ["https://smarteprinting.com/twitter-image.jpg"],
   },
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   other: {
     "language": "English",
     "distribution": "global",
