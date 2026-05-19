@@ -18,7 +18,7 @@ export default function TrailingSlashRedirect() {
       !pathname.endsWith('/') &&
       !pathname.match(/\.[a-zA-Z0-9]{2,5}$/) // don't redirect files like .js, .css, .png
     ) {
-      navigate(pathname + '/' + search + hash, { replace: true });
+      navigate.replace(pathname + '/' + search + hash);
     }
     // eslint-disable-next-line
   }, [location.pathname, location.search, location.hash, navigate]);

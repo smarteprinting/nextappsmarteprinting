@@ -17,7 +17,7 @@ const AdminLogin = () => {
     useEffect(() => {
         if (userInfo) {
             if (userInfo.isAdmin) {
-                navigate('/admin/dashboard');
+                navigate.push('/admin/dashboard');
             } else {
                 // If not admin, logout or show error? Better to just show error.
             }

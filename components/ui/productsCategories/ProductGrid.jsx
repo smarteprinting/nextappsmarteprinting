@@ -64,7 +64,7 @@ const ProductGrid = ({ heading = "Products", products = [], onFilterChange, enab
             return;
         }
         dispatch(addToCart(product.slug || product._id, 1));
-        navigate('/cart');
+        navigate.push('/cart');
     };
 
     const handleBuyNow = (e, product) => {
@@ -75,7 +75,7 @@ const ProductGrid = ({ heading = "Products", products = [], onFilterChange, enab
             return;
         }
         dispatch(addToCart(product.slug || product._id, 1));
-        navigate('/cart?redirect=shipping');
+        navigate.push('/cart?redirect=shipping');
     };
 
     return (
@@ -276,7 +276,7 @@ const ProductGrid = ({ heading = "Products", products = [], onFilterChange, enab
                             {/* Buttons */}
                             <div className="p-4 pt-0 flex flex-col gap-2 mt-auto">
                                 <button
-                                    onClick={() => navigate(product.link || `/product/${product.slug}`)}
+                                    onClick={() => navigate.push(product.link || `/product/${product.slug}`)}
                                     className="w-full py-2.5 bg-slate-900 text-white rounded-xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-slate-200 hover:bg-black transition-all active:scale-95 cursor-pointer"
                                 >
                                     See Details

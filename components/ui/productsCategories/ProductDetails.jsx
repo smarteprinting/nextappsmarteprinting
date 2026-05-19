@@ -24,6 +24,7 @@ const ProductDetails = () => {
     const [showReviewLoginMessage, setShowReviewLoginMessage] = useState(false);
     const [showEligibilityMessage, setShowEligibilityMessage] = useState(false);
     const [canReview, setCanReview] = useState(false);
+    const [isAddedToCart, setIsAddedToCart] = useState(false);
 
     const productDetails = useSelector((state) => state.productDetails);
     const { loading: productLoading, error, product: fetchedProduct } = productDetails;
@@ -82,7 +83,8 @@ const ProductDetails = () => {
             return;
         }
         dispatch(addToCart(product.slug || product._id, qty));
-        navigate('/cart');
+        setIsAddedToCart(true);
+        setTimeout(() => setIsAddedToCart(false), 6000);
     };
 
     const buyNowHandler = () => {
@@ -92,7 +94,7 @@ const ProductDetails = () => {
             return;
         }
         dispatch(addToCart(product.slug || product._id, qty));
-        navigate('/cart?redirect=shipping');
+        navigate.push('/cart?redirect=shipping');
     };
 
     const handleMouseEnter = () => {
@@ -149,7 +151,7 @@ const handleWriteReview = () => {
                 </p>
             </div>
             <button
-                onClick={() => navigate('/')}
+                onClick={() => navigate.push('/')}
                 className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-black transition-all shadow-xl shadow-slate-200"
             >
                 Return to Command Center
@@ -301,6 +303,30 @@ const handleWriteReview = () => {
                                 {showLoginMessage && (
                                     <div className="p-3 bg-red-50 text-red-600 rounded-xl text-xs font-bold text-center border border-red-100 animate-pulse">
                                         Please login to add items to cart
+                                    </div>
+                                )}
+                                {isAddedToCart && (
+                                    <div className="p-4 bg-emerald-50 text-emerald-800 rounded-2xl text-xs border border-emerald-100 shadow-sm space-y-3">
+                                        <div className="flex items-center gap-2 font-bold">
+                                            <svg className="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            Item successfully added to your cart!
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <button 
+                                                onClick={() => navigate.push('/cart')}
+                                                className="px-3 py-2 bg-slate-900 text-white rounded-xl font-bold uppercase text-[9px] tracking-wider hover:bg-black transition-all cursor-pointer"
+                                            >
+                                                View Cart
+                                            </button>
+                                            <button 
+                                                onClick={() => navigate.push('/checkout')}
+                                                className="px-3 py-2 bg-indigo-600 text-white rounded-xl font-bold uppercase text-[9px] tracking-wider hover:bg-indigo-700 transition-all cursor-pointer"
+                                            >
+                                                Proceed to Checkout
+                                            </button>
+                                        </div>
                                     </div>
                                 )}
                                 <div className="flex items-center gap-4">

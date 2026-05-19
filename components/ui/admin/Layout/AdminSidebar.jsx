@@ -23,7 +23,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
 
     const handleLogout = () => {
         dispatch(logout());
-        navigate('/admin/login');
+        navigate.push('/admin/login');
     };
 
     const navItems = [

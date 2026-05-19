@@ -23,7 +23,7 @@ const Cart = () => {
     };
 
     const checkoutHandler = () => {
-        navigate('/checkout');
+        navigate.push('/checkout');
     };
 
     return (
@@ -33,7 +33,7 @@ const Cart = () => {
                 {/* Header */}
                 <section className="w-full bg-white rounded-3xl border border-slate-100 p-8 md:p-12 mb-8 shadow-sm">
                     <div className="text-center">
-                        <h1 className="text-4xl font-black text-slate-900 uppercase tracking-tighter">Shopping Hub</h1>
+                        <h1 className="text-4xl font-black text-slate-900 uppercase tracking-tighter cursor-pointer">Shopping Hub</h1>
                         <p className="mt-4 text-xs font-black text-slate-500 uppercase tracking-[0.3em]">
                             You have <span className="text-slate-900">{cartItems.reduce((acc, item) => acc + item.qty, 0)}</span> items in your inventory
                         </p>
@@ -97,13 +97,13 @@ const Cart = () => {
                                                 <div className="flex items-center border border-slate-200 rounded-xl bg-white overflow-hidden h-10">
                                                     <button 
                                                         onClick={() => dispatch(addToCart(item.product, Math.max(1, item.qty - 1)))}
-                                                        className="px-3 hover:bg-slate-50 text-slate-400"
+                                                        className="px-3 hover:bg-slate-50 text-slate-400 cursor-pointer"
                                                         aria-label="Decrease quantity"
                                                     >-</button>
                                                     <span className="px-3 text-[10px] font-black text-slate-900">{item.qty}</span>
                                                     <button 
                                                         onClick={() => dispatch(addToCart(item.product, Math.min(item.countInStock, item.qty + 1)))}
-                                                        className="px-3 hover:bg-slate-50 text-slate-400"
+                                                        className="px-3 hover:bg-slate-50 text-slate-400 cursor-pointer"
                                                         aria-label="Increase quantity"
                                                     >+</button>
                                                 </div>
@@ -113,7 +113,7 @@ const Cart = () => {
                                             <div className="text-right">
                                                 <button 
                                                     onClick={() => removeFromCartHandler(item.product)}
-                                                    className="p-3 text-rose-500 hover:bg-rose-50 rounded-xl transition-all"
+                                                    className="p-3 text-rose-500 hover:bg-rose-50 rounded-xl transition-all cursor-pointer"
                                                     aria-label="Remove item from cart"
                                                 >
                                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,7 +160,7 @@ const Cart = () => {
                                 <div className="space-y-4 pt-4">
                                     <button 
                                         onClick={checkoutHandler}
-                                        className="w-full bg-slate-900 text-white py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-black transition-all shadow-xl shadow-slate-200 active:scale-95"
+                                        className="w-full bg-slate-900 text-white py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-black transition-all shadow-xl shadow-slate-200 active:scale-95 cursor-pointer"
                                     >
                                         Proceed to Secure Checkout
                                     </button>

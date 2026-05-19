@@ -113,7 +113,7 @@ const AdminDashboard = () => {
                 <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                     <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                         <h2 className="font-bold text-lg text-slate-800">Recent Orders</h2>
-                        <button onClick={() => navigate('/admin/orders')} className="text-sm text-blue-600 font-semibold hover:text-blue-700">View All</button>
+                        <button onClick={() => navigate.push('/admin/orders')} className="text-sm text-blue-600 font-semibold hover:text-blue-700">View All</button>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left text-sm min-w-[600px]">
@@ -131,7 +131,7 @@ const AdminDashboard = () => {
                                     <tr><td colSpan="5" className="py-10 text-center text-slate-400">Loading orders...</td></tr>
                                 ) : analytics && analytics.recentOrders && analytics.recentOrders.length > 0 ? (
                                     analytics.recentOrders.map((order) => (
-                                        <tr key={order._id} className="hover:bg-slate-50/50 transition-colors cursor-pointer" onClick={() => navigate('/admin/orders')}>
+                                        <tr key={order._id} className="hover:bg-slate-50/50 transition-colors cursor-pointer" onClick={() => navigate.push('/admin/orders')}>
                                             <td className="px-6 py-4 font-bold text-slate-700">{order._id.substring(order._id.length - 4).toUpperCase()}</td>
                                             <td className="px-6 py-4">
                                                 <div className="font-medium text-slate-800">{order.user?.name || 'Guest'}</div>
@@ -160,7 +160,7 @@ const AdminDashboard = () => {
                         <h3 className="font-bold text-slate-800 mb-4">Quick Stats</h3>
                         <div className="space-y-4">
                             <div
-                                onClick={() => navigate('/admin/orders')}
+                                onClick={() => navigate.push('/admin/orders')}
                                 className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors border border-transparent hover:border-slate-100 group"
                             >
                                 <div className="flex items-center gap-3">
@@ -170,7 +170,7 @@ const AdminDashboard = () => {
                                 <span className="font-bold text-slate-900">{analytics?.orders.total || 0}</span>
                             </div>
                             <div
-                                onClick={() => navigate('/admin/orders')}
+                                onClick={() => navigate.push('/admin/orders')}
                                 className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors border border-transparent hover:border-slate-100 group"
                             >
                                 <div className="flex items-center gap-3">
@@ -182,7 +182,7 @@ const AdminDashboard = () => {
                                 </span>
                             </div>
                             <div
-                                onClick={() => navigate('/admin/customers')}
+                                onClick={() => navigate.push('/admin/customers')}
                                 className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors border border-transparent hover:border-slate-100 group"
                             >
                                 <div className="flex items-center gap-3">

@@ -32,7 +32,7 @@ const Checkout = () => {
 
     useEffect(() => {
         if (!userInfo || cartItems.length === 0) {
-            navigate('/cart');
+            navigate.push('/cart');
         } else if (step === 2) {
             // Dynamically load Clover SDK if not already loaded
             const loadCloverAndInit = () => {
@@ -203,7 +203,7 @@ const Checkout = () => {
                 { headers: { Authorization: `Bearer ${userInfo.token}` } }
             );
 
-            navigate('/profile');
+            navigate.push('/profile');
 
         } catch (error) {
             alert(error.response?.data?.message || 'Clover payment failed');

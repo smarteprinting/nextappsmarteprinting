@@ -35,9 +35,9 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if (!userInfo) {
-            navigate('/');
+            navigate.push('/');
         } else if (userInfo.isAdmin) {
-            navigate('/admin/dashboard');
+            navigate.push('/admin/dashboard');
         } else {
             if (!user || !user.firstName || success) {
                 dispatch({ type: USER_UPDATE_PROFILE_RESET });

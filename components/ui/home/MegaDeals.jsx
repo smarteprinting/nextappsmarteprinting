@@ -4,6 +4,7 @@ import { ShoppingCart, Heart, Eye } from 'lucide-react';
 import { useRouter as useNavigate } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '@/store/actions/productActions';
+const printerImg = "/assets/printer.webp";
 
 
 const MegaDeals = () => {
@@ -26,7 +27,7 @@ const MegaDeals = () => {
         : [];
 
     const handleCardClick = (slug, id) => {
-        navigate(`/product/${slug || id}`);
+        navigate.push(`/product/${slug || id}`);
     };
 
     if (loading && (!products || products.length === 0)) return null;

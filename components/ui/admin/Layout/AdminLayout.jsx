@@ -31,7 +31,7 @@ const AdminLayout = () => {
     // Auth Check
     useEffect(() => {
         if (!userInfo || !userInfo.isAdmin) {
-            navigate('/admin/login');
+            navigate.push('/admin/login');
         }
     }, [userInfo, navigate]);
 
@@ -167,13 +167,13 @@ const AdminLayout = () => {
     const unreadCount = notifications.length;
 
     const handleNotifClick = (path) => {
-        navigate(path);
+        navigate.push(path);
         setIsNotifOpen(false);
     };
 
     const handleLogout = () => {
         dispatch(logout());
-        navigate('/admin/login');
+        navigate.push('/admin/login');
     };
 
     const openProfileModal = () => {

@@ -22,12 +22,12 @@ const TopPicksGrid = () => {
     const displayProducts = safeProducts.slice(0, 4);
 
     const handleProductClick = (slug, id) => {
-        navigate(`/product/${slug || id}`);
+        navigate.push(`/product/${slug || id}`);
     };
 
     const handleAddToCartClick = (e) => {
         e.stopPropagation();
-        navigate('/cart');
+        navigate.push('/cart');
     };
 
     if (loading && (!products || products.length === 0)) return null;
@@ -94,7 +94,7 @@ const TopPicksGrid = () => {
                             {/* Add to Cart Button */}
                             <button
                                 onClick={handleAddToCartClick}
-                                className="w-full bg-slate-900 text-white py-4 rounded-2xl hover:bg-black transition-all font-black uppercase text-[10px] tracking-widest active:scale-95 shadow-lg shadow-slate-200"
+                                className="w-full bg-slate-900 text-white py-4 rounded-2xl hover:bg-black transition-all font-black uppercase text-[10px] tracking-widest active:scale-95 shadow-lg shadow-slate-200 cursor-pointer"
                             >
                                 Add to Cart
                             </button>
