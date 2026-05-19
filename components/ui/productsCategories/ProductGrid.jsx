@@ -277,14 +277,14 @@ const ProductGrid = ({ heading = "Products", products = [], onFilterChange, enab
                             <div className="p-4 pt-0 flex flex-col gap-2 mt-auto">
                                 <button
                                     onClick={() => navigate(product.link || `/product/${product.slug}`)}
-                                    className="w-full py-2.5 bg-slate-900 text-white rounded-xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-slate-200 hover:bg-black transition-all active:scale-95"
+                                    className="w-full py-2.5 bg-slate-900 text-white rounded-xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-slate-200 hover:bg-black transition-all active:scale-95 cursor-pointer"
                                 >
                                     See Details
                                 </button>
                                 {inStock && (
                                     <button
                                         onClick={(e) => handleBuyNow(e, product)}
-                                        className="w-full py-2.5 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all font-black uppercase text-[10px] tracking-widest shadow-lg shadow-indigo-100 active:scale-95"
+                                        className="w-full py-2.5 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-all font-black uppercase text-[10px] tracking-widest shadow-lg shadow-indigo-100 active:scale-95 cursor-pointer"
                                     >
                                         Buy Now
                                     </button>

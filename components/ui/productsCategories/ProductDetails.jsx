@@ -308,12 +308,12 @@ const handleWriteReview = () => {
                                     <div className="flex items-center border border-slate-200 rounded-xl overflow-hidden bg-white">
                                         <button
                                             onClick={() => setQty(Math.max(1, qty - 1))}
-                                            className="px-4 py-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 transition-colors"
+                                            className="px-4 py-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 transition-colors cursor-pointer"
                                         > - </button>
                                         <span className="px-4 text-xs font-black text-slate-900">{qty}</span>
                                         <button
                                             onClick={() => setQty(Math.min(product.countInStock, qty + 1))}
-                                            className="px-4 py-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 transition-colors"
+                                            className="px-4 py-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 transition-colors cursor-pointer"
                                         > + </button>
                                     </div>
                                 </div>
@@ -324,9 +324,9 @@ const handleWriteReview = () => {
                             <button
                                 onClick={addToCartHandler}
                                 disabled={product.countInStock === 0}
-                                className={`flex-1 py-5 rounded-2xl transition-all font-black uppercase text-[10px] tracking-widest shadow-xl active:scale-95
+                                className={`flex-1 py-5 rounded-2xl transition-all font-black uppercase text-[10px] tracking-widest shadow-xl active:scale-95 cursor-pointer
                                     ${product.countInStock > 0
-                                        ? 'bg-slate-900 text-white hover:bg-black shadow-slate-200'
+                                        ? 'bg-slate-900 text-white hover:bg-black shadow-slate-200 cursor-pointer'
                                         : 'bg-slate-100 text-slate-400 cursor-not-allowed shadow-none'}`}
                             >
                                 {product.countInStock > 0 ? 'Add to Cart' : 'Out of Stock'}
@@ -334,7 +334,7 @@ const handleWriteReview = () => {
                             {product.countInStock > 0 && (
                                 <button
                                     onClick={buyNowHandler}
-                                    className="flex-1 py-5 bg-indigo-600 text-white rounded-2xl hover:bg-indigo-700 transition-all font-black uppercase text-[10px] tracking-widest shadow-xl shadow-indigo-100 active:scale-95"
+                                    className="flex-1 py-5 bg-indigo-600 text-white rounded-2xl hover:bg-indigo-700 transition-all font-black uppercase text-[10px] tracking-widest shadow-xl shadow-indigo-100 active:scale-95 cursor-pointer"
                                 >
                                     Buy Now
                                 </button>

@@ -188,7 +188,7 @@ const Header = () => {
                             <div className="flex items-center gap-2 md:gap-4 shrink-0 ml-auto lg:ml-0">
                                 <button
                                     onClick={() => setIsSearchOpen(true)}
-                                    className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-600 group"
+                                    className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-600 group cursor-pointer"
                                     aria-label="Search"
                                 >
                                     <Search size={22} className="group-hover:scale-110 transition-transform" />
@@ -197,7 +197,7 @@ const Header = () => {
                                     <div className="relative">
                                         <button
                                             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                                            className="hidden md:flex items-center gap-2 p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-600 group"
+                                            className="hidden md:flex items-center gap-2 p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-600 group cursor-pointer"
                                             aria-label="User menu"
                                         >
                                             <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm uppercase">
@@ -357,7 +357,7 @@ const Header = () => {
                                                 )}
                                                 <button
                                                     onClick={logoutHandler}
-                                                    className="flex items-center justify-center gap-2 py-2.5 px-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold text-red-600 hover:bg-red-50 transition-all"
+                                                    className="flex items-center justify-center gap-2 py-2.5 px-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold text-red-600 hover:bg-red-50 transition-all cursor-pointer"
                                                 >
                                                     Sign Out
                                                 </button>
@@ -369,13 +369,13 @@ const Header = () => {
                                         <div className="grid grid-cols-2 gap-3">
                                             <button
                                                 onClick={() => { setIsMenuOpen(false); setIsAuthOpen(true); }}
-                                                className="px-4 py-2.5 border border-slate-200 rounded-xl text-slate-700 font-semibold hover:bg-white transition-colors text-sm text-center"
+                                                className="px-4 py-2.5 border border-slate-200 rounded-xl text-slate-700 font-semibold hover:bg-white transition-colors text-sm text-center cursor-pointer"
                                             >
                                                 Login
                                             </button>
                                             <button
                                                 onClick={() => { setIsMenuOpen(false); setIsAuthOpen(true); }}
-                                                className="px-4 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 text-sm text-center shadow-lg shadow-blue-200"
+                                                className="px-4 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 text-sm text-center shadow-lg shadow-blue-200 cursor-pointer"
                                             >
                                                 Signup
                                             </button>
