@@ -264,7 +264,7 @@ const PrintingMistakesGuide = () => {
                         <p className="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">
                             Avoiding these common mistakes can instantly improve your printing experience. Smart ePrinting is committed to helping you print smarter every day.
                         </p>
-                        <Link href="/contact" className="inline-block bg-white text-orange-600 font-bold py-3 px-8 rounded-xl hover:bg-orange-50 transition-colors shadow-lg">
+                        <Link href="/customer-service" className="inline-block bg-white text-orange-600 font-bold py-3 px-8 rounded-xl hover:bg-orange-50 transition-colors shadow-lg">
                             Get Expert Setup Help
                         </Link>
                     </div>
