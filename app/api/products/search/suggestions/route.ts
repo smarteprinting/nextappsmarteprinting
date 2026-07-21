@@ -13,10 +13,22 @@ export async function GET(request: Request) {
         }
         
         const suggestions = await Product.find({
-            $or: [
-                { title: { $regex: `^${query.trim()}`, $options: 'i' } },
-                { brand: { $regex: `^${query.trim()}`, $options: 'i' } },
-                { color: { $regex: `^${query.trim()}`, $options: 'i' } }
+            $and: [
+                {
+                    $or: [
+                        { title: { $regex: `^${query.trim()}`, $options: 'i' } },
+                        { brand: { $regex: `^${query.trim()}`, $options: 'i' } },
+                        { color: { $regex: `^${query.trim()}`, $options: 'i' } }
+                    ]
+                },
+                {
+                    $nor: [
+                        { brand: { $regex: /hp/i } },
+                        { title: { $regex: /hp/i } },
+                        { slug: { $regex: /hp/i } },
+                        { description: { $regex: /hp/i } }
+                    ]
+                }
             ]
         })
         .select('title brand color images slug price')

@@ -3,7 +3,7 @@ import Component from '@/components/ui/productsCategories/laserPrinters/LaserPri
 
 export const metadata: Metadata = {
   title: 'Laser Printers | Fast & Reliable Business Printers - Smart ePrinting',
-  description: 'Upgrade your office with high-speed laser printers. Shop top brands like HP, Brother, and Canon for monochrome and color printing.',
+  description: 'Upgrade your office with high-speed laser printers. Shop reliable monochrome and color printers for home and business use.',
   keywords: ["laser printers", "business printers", "monochrome laser", "color laser printer"],
   alternates: {
     canonical: 'https://smarteprinting.com/product-category/laser-printers/',

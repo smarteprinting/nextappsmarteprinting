@@ -107,7 +107,6 @@ const ProductGrid = ({ heading = "Products", products = [], onFilterChange, enab
                             onChange={handleBrandChange}
                         >
                             <option value="">Select</option>
-                            <option value="HP">HP</option>
                             <option value="Canon">Canon</option>
                             <option value="Epson">Epson</option>
                             <option value="Brother">Brother</option>

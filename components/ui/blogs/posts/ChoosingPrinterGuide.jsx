@@ -232,7 +232,7 @@ const ChoosingPrinterGuide = () => {
                         </div>
                         <div>
                             <h3 className="font-bold text-lg text-slate-800 mb-2">H) Mobile Printing & App Support</h3>
-                            <p className="text-sm text-slate-600 mb-2">Essential for remote workers using multiple devices (HP Smart, Epson iPrint, etc.).</p>
+                            <p className="text-sm text-slate-600 mb-2">Essential for remote workers using multiple devices and printer companion apps.</p>
                         </div>
                     </div>
 

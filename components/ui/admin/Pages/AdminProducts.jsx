@@ -452,7 +452,7 @@ const AdminProducts = () => {
                                         name="brand"
                                         value={formData.brand}
                                         onChange={handleInputChange}
-                                        placeholder="e.g. HP, Canon"
+                                        placeholder="e.g. Canon, Brother"
                                         className="w-full px-5 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none font-bold text-slate-800"
                                     />
                                 </div>

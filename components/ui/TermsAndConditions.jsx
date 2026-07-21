@@ -59,7 +59,7 @@ const TermsAndConditions = () => {
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold text-gray-900">3. Independent Retailer Disclosure</h2>
             <p className="text-gray-600 leading-relaxed">
-              Smart ePrinting is not associated with, endorsed by, or authorized by any printer manufacturer, including HP, Canon, Epson, Brother, Lexmark, or any other brand. Product names, logos, and trademarks are used solely for identification and compatibility. All trademarks belong to their respective owners.
+              Smart ePrinting is not associated with, endorsed by, or authorized by any printer manufacturer. Product names, logos, and trademarks are used solely for identification and compatibility. All trademarks belong to their respective owners.
             </p>
           </div>
 

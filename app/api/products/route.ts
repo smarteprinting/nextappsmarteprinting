@@ -20,6 +20,13 @@ export async function GET(request: Request) {
         const mainFunction = searchParams.get('mainFunction');
 
         let query: any = {};
+
+        query.$nor = [
+            { brand: { $regex: /hp/i } },
+            { title: { $regex: /hp/i } },
+            { slug: { $regex: /hp/i } },
+            { description: { $regex: /hp/i } }
+        ];
         
         if (categoryName && categoryName !== 'undefined' && categoryName !== 'null') {
             const category = await Category.findOne({ name: { $regex: new RegExp(`^${categoryName}$`, 'i') } });

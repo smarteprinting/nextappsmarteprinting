@@ -31,7 +31,7 @@ const Disclaimer = () => {
               Smart ePrinting is an independent online retailer. We are not affiliated with, endorsed by, or authorized by any printer or technology manufacturer, including but not limited to:
             </p>
             <ul className="list-disc list-inside text-gray-600 space-y-1">
-              <li>HP</li>
+              <li>Major printer manufacturers</li>
               <li>Canon</li>
               <li>Epson</li>
               <li>Brother</li>

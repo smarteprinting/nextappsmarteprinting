@@ -469,7 +469,7 @@ const Header = () => {
                             <div className="text-center">
                                 <h3 className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">Popular searches</h3>
                                 <div className="flex flex-wrap justify-center gap-3">
-                                    {['HP Printers', 'Canon Ink', 'Wireless', 'LaserJet', 'Scanner', 'Color Ink'].map((term) => (
+                                    {['Wireless Printers', 'Canon Ink', 'Laser Printers', 'All-in-One Printers', 'Scanner', 'Color Ink'].map((term) => (
                                         <button
                                             key={term}
                                             className="px-5 py-2 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-medium hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all duration-200"

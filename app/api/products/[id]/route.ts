@@ -17,11 +17,20 @@ export async function GET(
 
     let product;
 
+    const hiddenProductFilter = {
+      $nor: [
+        { brand: { $regex: /hp/i } },
+        { title: { $regex: /hp/i } },
+        { slug: { $regex: /hp/i } },
+        { description: { $regex: /hp/i } }
+      ]
+    };
+
     if (mongoose.Types.ObjectId.isValid(idOrSlug)) {
-      product = await Product.findById(idOrSlug).populate({ path: 'category', select: 'name', model: Category });
+      product = await Product.findOne({ _id: idOrSlug, ...hiddenProductFilter }).populate({ path: 'category', select: 'name', model: Category });
     } else {
       // 1. Search by exact slug
-      product = await Product.findOne({ slug: idOrSlug }).populate({ path: 'category', select: 'name', model: Category });
+      product = await Product.findOne({ slug: idOrSlug, ...hiddenProductFilter }).populate({ path: 'category', select: 'name', model: Category });
 
       // 2. Fallback: Search by title (fuzzy/regex)
       if (!product) {
